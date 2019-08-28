@@ -1,0 +1,38 @@
+<h1>XSS</h1>
+<input id="input1"/><button onclick="xss_func()">提交</button>
+
+<script>
+   function xss_func(){
+        var content = document.getElementById('input1').value
+        fetch('/setContent',{
+            headers:{
+                "content-Type": "application/json"
+            },
+            method:"POST",
+            body:JSON.stringify({content}),
+        }).then(res=>{
+        })
+}
+</script>
+
+<h1>sql注入</h1>
+<input id="input2"/>
+<input id="input3"/>
+<button onclick="sql_func()">提交</button>
+<div id = "list">
+    </div>
+<script>
+   function sql_func(){
+        var username=document.getElementById('input2').value;
+        var password=document.getElementById('input3').value;
+        fetch('/getById',{
+            headers:{
+                "content-Type": "application/json"
+            },
+            method:"POST",
+            body:JSON.stringify({username,password}),
+        }).then(res=>res.text()).then(data=>{
+            alert(data)
+        })
+}
+</script>
