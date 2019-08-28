@@ -12,9 +12,9 @@ db.serialize(function() {
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(express.static('./public'))
+
+//---------------------xss---------------------------------
 var content = "";
-
-
 app.get("/content",(req,res)=>{
     // 解决方案：
     // res.send(escape(content))
@@ -26,7 +26,8 @@ app.post('/setContent',(req,res)=>{
     res.send("OK")
 })
 
-app.post('/getById',(req,res)=>{
+//---------------------xss---------------------------------
+app.post('/login',(req,res)=>{
     var sql = `select * from user where username='${req.body.username}' and password='${req.body.password}'`
     console.log(sql)
 
@@ -34,6 +35,7 @@ app.post('/getById',(req,res)=>{
     //var stmt = db.prepare(`select * from user where username=? and password=?`)
     
     db.serialize(function() {
+        // stmt.all([req.body.username,req.body.password],function(err,data){
         db.all(sql,function(err,data){
             if(err)console.log(err)
             console.log(data)
