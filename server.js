@@ -17,8 +17,8 @@ app.use(express.static('./public'))
 var content = "";
 app.get("/content",(req,res)=>{
     // 解决方案：
-    // res.send(escape(content))
-    res.send(content)
+    res.send(escape(content))
+    // res.send(content)
 })
 
 app.post('/setContent',(req,res)=>{
@@ -32,11 +32,11 @@ app.post('/login',(req,res)=>{
     console.log(sql)
 
     //解决方案
-    //var stmt = db.prepare(`select * from user where username=? and password=?`)
+    var stmt = db.prepare(`select * from user where username=? and password=?`)
     
     db.serialize(function() {
-        // stmt.all([req.body.username,req.body.password],function(err,data){
-        db.all(sql,function(err,data){
+        stmt.all([req.body.username,req.body.password],function(err,data){
+        // db.all(sql,function(err,data){
             if(err)console.log(err)
             console.log(data)
             if(data.length>0)
