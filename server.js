@@ -8,7 +8,13 @@ db.serialize(function() {
     db.run("insert into user values (1,'张三','123')");
     db.run("insert into user values (2,'李四','456')");
 })
-
+// x-frame-options
+// content-security-policy
+app.all("*",(req,res,next)=>{
+    res.header('x-frame-options','deny');
+    res.header('content-security-policy',"script-src 'self' https://cdn.bootcss.com")
+    next()
+})
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(express.static('./public'))
@@ -26,7 +32,7 @@ app.post('/setContent',(req,res)=>{
     res.send("OK")
 })
 
-//---------------------xss---------------------------------
+//---------------------sql---------------------------------
 app.post('/login',(req,res)=>{
     var sql = `select * from user where username='${req.body.username}' and password='${req.body.password}'`
     console.log(sql)
@@ -46,5 +52,6 @@ app.post('/login',(req,res)=>{
         })
     })
 })
+
 
 app.listen(4000)
