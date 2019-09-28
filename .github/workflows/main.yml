@@ -1,8 +1,9 @@
 name: CI
 
 on: [push]
-runs-on: ubuntu-latest
+
 jobs:
+  runs-on: ubuntu-latest
   build:
     steps:
     - run: |
