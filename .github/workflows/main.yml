@@ -5,7 +5,8 @@ on: [push]
 jobs:
   build:
     steps:
-    - uses: docker://alpine
     - run: |
-        apk add curl
+        echo $PATH
+        node -v
+        python -v
         curl https://www.baidu.com
