@@ -9,5 +9,9 @@ jobs:
     - run: |
         echo $PATH
         node -v
-        python -v
-        curl https://www.baidu.com
+        npm -v
+        python --version
+        docker version
+        java -version
+        go version
+        mvn -version
