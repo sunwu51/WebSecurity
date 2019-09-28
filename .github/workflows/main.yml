@@ -16,4 +16,4 @@ jobs:
         mvn -version
         docker version
         docker-compose -v
-        git v
+        git version
