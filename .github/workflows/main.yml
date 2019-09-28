@@ -11,7 +11,8 @@ jobs:
         node -v
         npm -v
         python --version
-        docker version
         java -version
         go version
         mvn -version
+        docker version
+        docker-compose -v
